@@ -12,7 +12,7 @@ local Library = loadstring(
 
 ```lua
 local Library = loadstring(
-    game:HttpGetAsync(`https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/source.luau?t={tostring(tick())}`)
+    game:HttpGetAsync(`https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/source?t={tostring(tick())}`)
 )()
 ```
 
