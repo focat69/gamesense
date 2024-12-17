@@ -268,4 +268,5 @@ Library:Notify({
 This is my first ever proper UI library, so any feedback is appreciated. I hope you find this useful! `:)`
 
 Made with 💕 by [@focat69](https://github.com/@focat69)  
-Check out https://weao.xyz & https://shotta.city whilst you're at it.
+Check out https://weao.xyz & https://shotta.city whilst you're at it.  
+Thank you to all contributors for adding little fixes!
