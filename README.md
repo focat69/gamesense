@@ -89,7 +89,7 @@ end)
 
 #### `Tab:Label(options: table)`
 
-Adds a label (text display) to the tab.
+Adds a label (text display) to the tab. **This label supports [Rich Text](https://create.roblox.com/docs/ui/rich-text)**.
 
 | **Argument** | **Type** | **Default**                         | **Description**                         |
 |--------------|----------|-------------------------------------|-----------------------------------------|
