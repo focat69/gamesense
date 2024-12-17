@@ -319,7 +319,6 @@ end
 		local watermark_gui  = script.Parent
 		local watermark_text = watermark_gui["watermark"]
 		local heartbeat      = s_runservice.Heartbeat
-		local displayname    = localplayer.DisplayName
 
 		---
 
@@ -330,7 +329,8 @@ end
 		end
 		env["_internal"]["update_watermark"] = function()
 			local time = env["_internal"]["get_time"]()
-			watermark_text.Text = string.format("<font color=\"#31ff42\">gamesense</font> | %s | %s", displayname, time)
+			local ping = math.floor(s_stats.PerformanceStats.Ping:GetValue())
+			watermark_text.Text = string.format("<font color=\"#31ff42\">gamesense</font> | %s ms| %s", ping, time)
 		end
 
 		---
