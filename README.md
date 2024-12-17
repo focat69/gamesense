@@ -22,6 +22,7 @@ local Window = Library:New({
     Name = "gamesense | Rivals Premium",
     Padding = 8
 })
+Window:Destroy() -- destroys window (wow)
 ```
 
 ## **Creating Tabs**
@@ -122,6 +123,7 @@ Adds a slider to the tab.
 | `Min`       | `number`   | `0`         | The minimum value for the slider.        |
 | `Max`       | `number`   | `100`       | The maximum value for the slider.        |
 | `Default`   | `number`   | `50`        | The initial value of the slider.         |
+| `Step`      | `number`   | `1`         | How much the value increments by         |
 | `Callback`  | `function` | `function()`| A function called when the slider value changes. |
 
 #### **Methods:**
@@ -140,6 +142,7 @@ local slider = miscTab:Slider({
     Min = 0,
     Max = 100,
     Default = 10,
+    Step = 1,
     Callback = function(v)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
     end
