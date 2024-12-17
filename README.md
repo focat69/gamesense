@@ -1,23 +1,33 @@
-# **gamesense.lua UI Library Documentation**
+# Gamesense.lua
+- UI Library made for Roblox, inspired by the Counter-Strike cheat "Gamesense" aka "Skeet.cc"
 
+# UI Demo
 ```lua
 local Library = loadstring(
-    game:HttpGetAsync("https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/source?t=" .. tostring(tick()))
+    game:HttpGetAsync("https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/example.luau")
 )()
 ```
 
-## **Library Initialization**
+# Library Documentation
+
+```lua
+local Library = loadstring(
+    game:HttpGetAsync(`https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/source.luau?t={tostring(tick())}`)
+)()
+```
+
+## Library Initialization
 
 ### `Library:New(options: table)`
 
 Creates a new window for the UI library.
 
-| **Argument** | **Type** | **Default**     | **Description**                                           |
+| Argument | Type |         Default     | Description                                                       |
 |--------------|----------|-----------------|-----------------------------------------------------------|
-| `Name`      | `string` | `"gamesense.lua"` | The name of the UI window. **If the name starts with `gamesense`, the word `sense` will appear green.** |
+| `Name`      | `string` | `"gamesense.lua"` | The name of the UI window. **If the name starts with `gamesense`, the word `sense` will appear green**. |
 | `Padding`   | `number` | `6`             | Padding between UI components.                            |
 
-**Example:**
+Example:
 
 ```lua
 local Window = Library:New({
@@ -27,17 +37,17 @@ local Window = Library:New({
 Window:Destroy() -- destroys window (wow)
 ```
 
-## **Creating Tabs**
+## Creating Tabs
 
 ### `Window:CreateTab(options: table)`
 
 Creates a new tab inside the UI window.
 
-| **Argument** | **Type** | **Default** | **Description**           |
+| Argument | Type | Default | Description           |
 |--------------|----------|-------------|---------------------------|
 | `Name`      | `string` | `"Tab"`     | The name of the tab.      |
 
-**Example:**
+Example:
 
 ```lua
 local aimbotTab = Window:CreateTab({ Name = "Aimbot" })
@@ -45,20 +55,20 @@ local visualsTab = Window:CreateTab({ Name = "Visuals" })
 ```
 
 
-## **Components**
+## Components
 
-### **Button**
+### Button
 
 #### `Tab:Button(options: table)`
 
 Adds a button to the tab.
 
-| **Argument** | **Type**   | **Default** | **Description**                                   |
+| Argument | Type   | Default | Description                                   |
 |--------------|------------|-------------|-------------------------------------------------|
 | `Name`      | `string`   | `"Button"`  | The name of the button.                          |
 | `Callback`  | `function` | `function()`| A function to run when the button is clicked.    |
 
-#### **Methods:**
+#### Methods:
 
 - `Button:SetText(text: string)`  
    Updates the button's display text.
@@ -66,7 +76,7 @@ Adds a button to the tab.
 - `Button:SetCallback(fn: function)`  
    Changes the button's callback function.
 
-**Example:**
+Example:
 
 ```lua
 local btn = aimbotTab:Button({
@@ -87,22 +97,22 @@ end)
 ```
 
 
-### **Label**
+### Label
 
 #### `Tab:Label(options: table)`
 
-Adds a label (text display) to the tab. **This label supports [Rich Text](https://create.roblox.com/docs/ui/rich-text)**.
+Adds a label (text display) to the tab. This label supports [Rich Text](https://create.roblox.com/docs/ui/rich-text).
 
-| **Argument** | **Type** | **Default**                         | **Description**                         |
+| Argument | Type | Default                         | Description                         |
 |--------------|----------|-------------------------------------|-----------------------------------------|
 | `Message`   | `string` | `"This is an example label."`       | The text to display in the label.       |
 
-#### **Methods:**
+#### Methods:
 
 - `Label:SetText(text: string)`  
    Updates the label's message.
 
-**Example:**
+Example:
 
 ```lua
 local label = aimbotTab:Label({
@@ -113,13 +123,13 @@ label:SetText("Silent aim is FUD! :D")
 ```
 
 
-### **Slider**
+### Slider
 
 #### `Tab:Slider(options: table)`
 
 Adds a slider to the tab.
 
-| **Argument** | **Type**   | **Default** | **Description**                          |
+| Argument | Type   | Default | Description                          |
 |--------------|------------|-------------|------------------------------------------|
 | `Name`      | `string`   | `"Slider"`  | The name of the slider.                  |
 | `Min`       | `number`   | `0`         | The minimum value for the slider.        |
@@ -128,7 +138,7 @@ Adds a slider to the tab.
 | `Step`      | `number`   | `1`         | How much the value increments by         |
 | `Callback`  | `function` | `function()`| A function called when the slider value changes. |
 
-#### **Methods:**
+#### Methods:
 
 - `Slider:SetValue(v: number)`  
    Sets the slider's value programmatically.
@@ -136,7 +146,7 @@ Adds a slider to the tab.
 - `Slider:GetValue()`  
    Returns the slider's current value.
 
-**Example:**
+Example:
 
 ```lua
 local slider = miscTab:Slider({
@@ -155,19 +165,19 @@ print(slider:GetValue()) -- Prints the current value of the slider
 ```
 
 
-### **Toggle**
+### Toggle
 
 #### `Tab:Toggle(options: table)`
 
 Adds a toggle switch to the tab.
 
-| **Argument** | **Type**   | **Default** | **Description**                              |
+| Argument | Type   | Default | Description                              |
 |--------------|------------|-------------|----------------------------------------------|
 | `Name`      | `string`   | `"Toggle"`  | The name of the toggle.                      |
 | `State`     | `boolean`  | `false`     | The initial state of the toggle (on/off).    |
 | `Callback`  | `function` | `function()`| A function called when the toggle changes.   |
 
-#### **Methods:**
+#### Methods:
 
 - `Toggle:SetValue(bool: boolean)`  
    Sets the toggle's state.
@@ -175,7 +185,7 @@ Adds a toggle switch to the tab.
 - `Toggle:GetValue()`  
    Returns the current state of the toggle.
 
-**Example:**
+Example:
 
 ```lua
 local toggle3d = miscTab:Toggle({
@@ -191,18 +201,18 @@ print(toggle3d:GetValue()) -- Prints false
 ```
 
 
-### **Textbox**
+### Textbox
 
 #### `Tab:Textbox(options: table)`
 
 Adds a textbox input field to the tab.
 
-| **Argument**   | **Type**   | **Default**                       | **Description**                          |
+| Argument   | Type   | Default                       | Description                          |
 |----------------|------------|-----------------------------------|------------------------------------------|
 | `Placeholder` | `string`   | `"Enter your username..."`        | Placeholder text displayed in the textbox. |
 | `Callback`    | `function` | `function()`                      | A function called when input is submitted. |
 
-#### **Methods:**
+#### Methods:
 
 - `Textbox:SetValue(text: string)`  
    Sets the textbox value programmatically.
@@ -210,7 +220,7 @@ Adds a textbox input field to the tab.
 - `Textbox:GetValue()`  
    Returns the current text in the textbox.
 
-**Example:**
+Example:
 
 ```lua
 local webhookTextbox = webhookTab:Textbox({
@@ -226,18 +236,18 @@ print(webhookTextbox:GetValue()) -- Prints the current input value
 
 ---
 
-## **Notifications**
+## Notifications
 
 ### `Library:Notify(options: table)`
 
 Displays a temporary notification.
 
-| **Argument**    | **Type** | **Default**                            | **Description**                       |
+| Argument    | Type | Default                            | Description                       |
 |-----------------|----------|----------------------------------------|---------------------------------------|
 | `Description`  | `string` | `"This is an example notification!"`  | The notification text.                |
 | `Duration`     | `number` | `5`                                    | Duration of the notification (in seconds). |
 
-**Example:**
+Example:
 
 ```lua
 Library:Notify({
@@ -248,7 +258,7 @@ Library:Notify({
 
 ---
 
-# **Note**
+# Note
 
 - The library automatically handles validation for all arguments using `Library:_validate()`.
 - Meaning if you miss a field (like `Name` for a Button) it will set it self to the default value.
