@@ -1409,3 +1409,5 @@ function Library:New(options: table)
 	})
 	return GUI
 end
+
+return Library
