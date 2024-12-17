@@ -8,19 +8,22 @@ local s_tweenservice = game:GetService("TweenService")
 local s_runservice   = game:GetService("RunService")
 local s_coregui      = game:GetService("CoreGui")
 local s_uis          = game:GetService("UserInputService")
+local s_workspace    = game:GetService("Workspace")
+local s_stats        = game:GetService("Stats")
 
 --// Constants
-LOCALPLAYER = s_players.LocalPlayer
-MOUSE       = LOCALPLAYER:GetMouse()
-VIEWPORT    = workspace.CurrentCamera.ViewportSize
-TWEENINFO   = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
+local localplayer    = s_players.LocalPlayer
+local playermouse    = localplayer:GetMouse()
+local viewportsize   = workspace.CurrentCamera.ViewportSize
+local tweeninfo      = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
 
 --// Internal
-function _internal_gettime()
+local function _internal_gettime()
 	local time = os.date("%H:%M:%S", os.time())
 	return time
 end
-function _internal_randomstr(len)
+
+local function _internal_randomstr(len)
 	if not len then
 		len = 50
 	end
@@ -62,7 +65,7 @@ end
 	Converted["_gamesense.lua"].ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
 	Converted["_gamesense.lua"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Converted["_gamesense.lua"].Name = "gamesense_".._internal_randomstr(32)
-	Converted["_gamesense.lua"].Parent = s_runservice:IsStudio() and s_players.LocalPlayer:WaitForChild("PlayerGui") or gethui() or s_coregui
+	Converted["_gamesense.lua"].Parent = s_runservice:IsStudio() and localplayer:WaitForChild("PlayerGui") or gethui() or s_coregui
 
 	Converted["_watermark"].Font = Enum.Font.RobotoMono
 	Converted["_watermark"].RichText = true
@@ -315,10 +318,7 @@ end
 
 		local watermark_gui  = script.Parent
 		local watermark_text = watermark_gui["watermark"]
-		local s_players      = game:GetService("Players")
-		local s_runservice   = game:GetService("RunService")
 		local heartbeat      = s_runservice.Heartbeat
-		local localplayer    = s_players.LocalPlayer
 		local displayname    = localplayer.DisplayName
 
 		---
@@ -365,7 +365,7 @@ function Library:_validate(defaults: table, options: table)
 	return options
 end
 function Library:_tween(object, goal, callback)
-	local tween = s_tweenservice:Create(object, TWEENINFO, goal)
+	local tween = s_tweenservice:Create(object, tweeninfo, goal)
 	tween.Completed:Connect(callback or function() end)
 	tween:Play()
 end
@@ -392,7 +392,7 @@ function Library:New(options: table)
 	--// Initalization
 	do
 		-- StarterGui.ui lib
-		GUI["1"] = Instance.new("ScreenGui", s_runservice:IsStudio() and s_players.LocalPlayer:WaitForChild("PlayerGui") or gethui() or s_coregui)
+		GUI["1"] = Instance.new("ScreenGui", s_runservice:IsStudio() and localplayer:WaitForChild("PlayerGui") or gethui() or s_coregui)
 		GUI["1"]["IgnoreGuiInset"] = true;
 		GUI["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 		GUI["1"]["Name"] = [[gamesense.lua]];
@@ -405,8 +405,8 @@ function Library:New(options: table)
 		GUI["2"]["BackgroundColor3"] = Color3.fromRGB(22, 22, 21);
 		GUI["2"]["Size"] = UDim2.new(0, 380, 0, 436);
 		GUI["2"]["Position"] = UDim2.fromOffset(
-			(VIEWPORT.X / 2) - GUI["2"].Size.X.Offset / 2, 
-			(VIEWPORT.Y / 2) - GUI["2"].Size.Y.Offset / 2
+			(viewportsize.X / 2) - GUI["2"].Size.X.Offset / 2, 
+			(viewportsize.Y / 2) - GUI["2"].Size.Y.Offset / 2
 		)
 		GUI["2"]["BorderColor3"] = Color3.fromRGB(100, 100, 100);
 		GUI["2"]["Name"] = [[gamesense window]];
@@ -1017,6 +1017,7 @@ function Library:New(options: table)
 				--	Label["7"].TextBounds.Y
 				--)
 			end
+			return Label
 		end
 		
 		function Tab:Slider(options: table)
@@ -1135,7 +1136,7 @@ function Library:New(options: table)
 					
 					----// 2c == bar inside, so we use 2a to reference the whole bar
 					local percentage = math.clamp(
-						(MOUSE.X - Slider["2a"].AbsolutePosition.X) / Slider["2a"].AbsoluteSize.X, 0, 1
+						(playermouse.X - Slider["2a"].AbsolutePosition.X) / Slider["2a"].AbsoluteSize.X, 0, 1
 					)
 					local rawValue = ((options.Max - options.Min) * percentage) + options.Min
 					local steppedValue = math.floor((rawValue / step) + 0.5) * step --// round to nearest step
@@ -1208,6 +1209,7 @@ function Library:New(options: table)
 			do
 				Slider:SetValue(options["Default"]) --// will position slider @ default area and not hard coded position
 			end
+            return Slider
 		end
 		
 		function Tab:Toggle(options: table)
@@ -1315,11 +1317,12 @@ function Library:New(options: table)
 					options["Callback"](Toggle:GetValue())
 				end)
 			end
+            return Toggle
 		end
 		
 		function Tab:Textbox(options: table)
 			options = Library:_validate({
-				Placeholder = "Enter your username...",
+				Placeholder = "Text Placeholder",
 				Callback = function(v) print(v) end
 			}, options or {})
 
@@ -1398,6 +1401,7 @@ function Library:New(options: table)
 					options["Callback"](Textbox:GetValue())
 				end)
 			end
+            return Textbox
 		end
 		
 		return Tab
