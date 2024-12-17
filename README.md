@@ -215,6 +215,7 @@ webhookTextbox:SetValue("https://discord.com/api/webhooks/1234567890/abcdefg")
 print(webhookTextbox:GetValue()) -- Prints the current input value
 ```
 
+---
 
 ## **Notifications**
 
