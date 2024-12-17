@@ -1,7 +1,9 @@
 # **gamesense.lua UI Library Documentation**
 
 ```lua
-local Library = loadstring(game:HttpGetAsync 'https://raw.githubusercontent.com/focat69/gamesense/main/source')()
+local Library = loadstring(
+    game:HttpGetAsync("https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/source?t=" .. tostring(tick()))
+)()
 ```
 
 ## **Library Initialization**
