@@ -1,5 +1,9 @@
 # **gamesense.lua UI Library Documentation**
 
+```lua
+loadstring(game:HttpGetAsync 'https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/source')()
+```
+
 ## **Library Initialization**
 
 ### `Library:New(options: table)`
