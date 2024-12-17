@@ -64,25 +64,18 @@ end
 	Converted["_gamesense.lua"].Name = "gamesense_".._internal_randomstr(32)
 	Converted["_gamesense.lua"].Parent = s_runservice:IsStudio() and s_players.LocalPlayer:WaitForChild("PlayerGui") or gethui() or s_coregui
 
-	Converted["_watermark bg"].BackgroundColor3 = Color3.fromRGB(21.000000648200512, 21.000000648200512, 20.000000707805157)
-	Converted["_watermark bg"].BorderColor3 = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
-	Converted["_watermark bg"].Position = UDim2.new(1.02613378, -240, 0.00628930796, 6)
-	Converted["_watermark bg"].Size = UDim2.new(0, 180, 0, 27)
-	Converted["_watermark bg"].Name = "watermark bg"
-	Converted["_watermark bg"].Parent = Converted["_gamesense.lua"]
-
 	Converted["_watermark"].Font = Enum.Font.RobotoMono
-	Converted["_watermark"].Text = "gamesense | focat | 00:00:00"
+	Converted["_watermark"].RichText = true
+	Converted["_watermark"].Text = "<font color=\"#31ff42\">gamesense</font> | focat9123123 | 00:00:00"
 	Converted["_watermark"].TextColor3 = Color3.fromRGB(255, 255, 255)
 	Converted["_watermark"].TextSize = 12
+	Converted["_watermark"].AutomaticSize = Enum.AutomaticSize.XY
 	Converted["_watermark"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_watermark"].BackgroundTransparency = 1
-	Converted["_watermark"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Converted["_watermark"].BorderSizePixel = 0
-	Converted["_watermark"].Position = UDim2.new(0.5, -100, 0.5, -13)
-	Converted["_watermark"].Size = UDim2.new(0, 200, 0, 26)
+	Converted["_watermark"].BorderColor3 = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
+	Converted["_watermark"].Position = UDim2.new(0.973097622, -204, 0.0188679248, 0)
+	Converted["_watermark"].Size = UDim2.new(0, 221, 0, 29)
 	Converted["_watermark"].Name = "watermark"
-	Converted["_watermark"].Parent = Converted["_watermark bg"]
+	Converted["_watermark"].Parent = Converted["_gamesense.lua"]
 
 	Converted["_sense"].Font = Enum.Font.RobotoMono
 	Converted["_sense"].Text = "sense"
@@ -321,7 +314,7 @@ end
 		-- gamesense->watermark
 
 		local watermark_gui  = script.Parent
-		local watermark_text = watermark_gui["watermark bg"]["watermark"] -- lol
+		local watermark_text = watermark_gui["watermark"]
 		local s_players      = game:GetService("Players")
 		local s_runservice   = game:GetService("RunService")
 		local heartbeat      = s_runservice.Heartbeat
@@ -337,7 +330,7 @@ end
 		end
 		env["_internal"]["update_watermark"] = function()
 			local time = env["_internal"]["get_time"]()
-			watermark_text.Text = string.format("gamesense | %s | %s", displayname, time)
+			watermark_text.Text = string.format("<font color=\"#31ff42\">gamesense</font> | %s | %s", displayname, time)
 		end
 
 		---
@@ -557,6 +550,13 @@ function Library:New(options: table)
 				dragging = false
 			end
 		end)
+	end
+	
+	--// GUI/Window Methods
+	do
+		function GUI:Destroy()
+			GUI["2"]:Destroy() --// yay
+		end
 	end
 	
 	--// Navigation
@@ -1025,6 +1025,7 @@ function Library:New(options: table)
 				Min = 0,
 				Max = 100,
 				Default = 50,
+				Step = 1,
 				Callback = function(v) print(v) end
 			}, options or {})
 			
@@ -1129,24 +1130,34 @@ function Library:New(options: table)
 			
 			--// Methods
 			function Slider:SetValue(v: number)
-				if v == nil then --// sets value to where bar/mouse is
-					--//                 2c == bar inside, so we use 2a to reference the whole bar
-					local percentage = math.clamp((MOUSE.X - Slider["2a"].AbsolutePosition.X) / (Slider["2a"].AbsoluteSize.X), 0, 1)
-					local value = math.floor(((options.Max - options.Min) * percentage) + options.Min)
+				local step = options.Step
+				if v == nil then --// setting via mouse/drag
 					
-					Slider["27"].Text = tostring(value)
-					Slider["2c"].Size = UDim2.fromScale(percentage, 1)
+					----// 2c == bar inside, so we use 2a to reference the whole bar
+					local percentage = math.clamp(
+						(MOUSE.X - Slider["2a"].AbsolutePosition.X) / Slider["2a"].AbsoluteSize.X, 0, 1
+					)
+					local rawValue = ((options.Max - options.Min) * percentage) + options.Min
+					local steppedValue = math.floor((rawValue / step) + 0.5) * step --// round to nearest step
+					local clampedValue = math.clamp(steppedValue, options.Min, options.Max) --// ensure boundaries
+
+					--// determine how far back step goes (0.001 = format to 3 decimals, 0.01 = 2, 0.1 = 1, 1 = 0 etc)
+					local stepString = tostring(step)
+					local decimalMatch = stepString:match("%.(%d+)$")
+					local decimalPlaces = decimalMatch and #decimalMatch or 0 --// uses 0 if there's no decimal part
+					local format = "%." .. decimalPlaces .. "f"
+					Slider["27"].Text = string.format(format, clampedValue) --// format to x dcimal places
+					Slider["2c"].Size = UDim2.fromScale((clampedValue - options.Min) / (options.Max - options.Min), 1)
+					
 				else --// manually changed via lua
+					
 					assert(v >= options.Min and v <= options.Max, string.format("[ gamesense ] [ slider_%s ] value must be between %s and %s", options.Name, options.Min, options.Max))
 					assert(typeof(v) == "number", "[ gamesense ] [ slider_"..options["Name"].." ] value must be a number")
 					Slider["27"].Text = tostring(v)
 					Slider["2c"].Size = UDim2.fromScale((v - options.Min) / (options.Max - options.Min), 1)
+					
 				end
 				
-				--local s,r = pcall(options.Callback(Slider:GetValue()))
-				--if not s then
-				--	warn(string.format("[ gamesense.lua ] [ %s - %s ] Error on slider callback: %s", options.Name, _internal_gettime(), r))
-				--end
 				options.Callback(Slider:GetValue())
 			end
 			function Slider:GetValue()
@@ -1398,5 +1409,3 @@ function Library:New(options: table)
 	})
 	return GUI
 end
-
-return Library
