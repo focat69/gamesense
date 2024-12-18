@@ -8,22 +8,19 @@ local s_tweenservice = game:GetService("TweenService")
 local s_runservice   = game:GetService("RunService")
 local s_coregui      = game:GetService("CoreGui")
 local s_uis          = game:GetService("UserInputService")
-local s_workspace    = game:GetService("Workspace")
-local s_stats        = game:GetService("Stats")
 
 --// Constants
-local localplayer    = s_players.LocalPlayer
-local playermouse    = localplayer:GetMouse()
-local viewportsize   = workspace.CurrentCamera.ViewportSize
-local tweeninfo      = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
+LOCALPLAYER = s_players.LocalPlayer
+MOUSE       = LOCALPLAYER:GetMouse()
+VIEWPORT    = workspace.CurrentCamera.ViewportSize
+TWEENINFO   = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
 
 --// Internal
-local function _internal_gettime()
+function _internal_gettime()
 	local time = os.date("%H:%M:%S", os.time())
 	return time
 end
-
-local function _internal_randomstr(len)
+function _internal_randomstr(len)
 	if not len then
 		len = 50
 	end
@@ -39,319 +36,304 @@ end
 
 --// Notif Lib + Watermark (im too lazy to properly "include" these hahahha)
 --do
-	-- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
-	local Converted = {
-		["_gamesense.lua"] = Instance.new("ScreenGui");
-		["_tick"] = Instance.new("LocalScript");
-		["_watermark bg"] = Instance.new("Frame");
-		["_watermark"] = Instance.new("TextLabel");
-		["_sense"] = Instance.new("TextLabel");
-		["_notifs"] = Instance.new("Frame");
-		["_Template"] = Instance.new("Frame");
-		["_game"] = Instance.new("TextLabel");
-		["_sense1"] = Instance.new("TextLabel");
-		["_Description"] = Instance.new("TextLabel");
-		["_UIStroke"] = Instance.new("UIStroke");
-		["_timestamp"] = Instance.new("TextLabel");
-		["_UIListLayout"] = Instance.new("UIListLayout");
-		["_assets"] = Instance.new("Folder");
-		["_notif"] = Instance.new("Sound");
-		["_gs_notif_lib"] = Instance.new("ModuleScript");
-	}
+-- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
+local Converted = {
+	["_gamesense.lua"] = Instance.new("ScreenGui");
+	["_tick"] = Instance.new("LocalScript");
+	["_watermark bg"] = Instance.new("Frame");
+	["_watermark"] = Instance.new("TextLabel");
+	["_sense"] = Instance.new("TextLabel");
+	["_notifs"] = Instance.new("Frame");
+	["_Template"] = Instance.new("Frame");
+	["_game"] = Instance.new("TextLabel");
+	["_sense1"] = Instance.new("TextLabel");
+	["_Description"] = Instance.new("TextLabel");
+	["_UIStroke"] = Instance.new("UIStroke");
+	["_timestamp"] = Instance.new("TextLabel");
+	["_UIListLayout"] = Instance.new("UIListLayout");
+	["_assets"] = Instance.new("Folder");
+	["_notif"] = Instance.new("Sound");
+}
 
-	-- Properties:
+-- Properties:
 
-	Converted["_gamesense.lua"].IgnoreGuiInset = true
-	Converted["_gamesense.lua"].ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
-	Converted["_gamesense.lua"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	Converted["_gamesense.lua"].Name = "gamesense_".._internal_randomstr(32)
-	Converted["_gamesense.lua"].Parent = s_runservice:IsStudio() and localplayer:WaitForChild("PlayerGui") or gethui() or s_coregui
+Converted["_gamesense.lua"].IgnoreGuiInset = true
+Converted["_gamesense.lua"].ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+Converted["_gamesense.lua"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_gamesense.lua"].Name = "gamesense_".._internal_randomstr(32)
+Converted["_gamesense.lua"].Parent = s_runservice:IsStudio() and s_players.LocalPlayer:WaitForChild("PlayerGui") or gethui() or s_coregui
 
-	Converted["_watermark"].Font = Enum.Font.RobotoMono
-	Converted["_watermark"].RichText = true
-	Converted["_watermark"].Text = "<font color=\"#31ff42\">gamesense</font> | focat9123123 | 00:00:00"
-	Converted["_watermark"].TextColor3 = Color3.fromRGB(255, 255, 255)
-	Converted["_watermark"].TextSize = 12
-	Converted["_watermark"].AutomaticSize = Enum.AutomaticSize.XY
-	Converted["_watermark"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_watermark"].BorderColor3 = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
-	Converted["_watermark"].Position = UDim2.new(0.973097622, -204, 0.0188679248, 0)
-	Converted["_watermark"].Size = UDim2.new(0, 221, 0, 29)
-	Converted["_watermark"].Name = "watermark"
-	Converted["_watermark"].Parent = Converted["_gamesense.lua"]
+Converted["_watermark"].Font = Enum.Font.RobotoMono
+Converted["_watermark"].RichText = true
+Converted["_watermark"].Text = "<font color=\"#31ff42\">gamesense</font> | focat9123123 | 00:00:00"
+Converted["_watermark"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_watermark"].TextSize = 12
+Converted["_watermark"].AutomaticSize = Enum.AutomaticSize.XY
+Converted["_watermark"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
+Converted["_watermark"].BorderColor3 = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
+Converted["_watermark"].Position = UDim2.new(0.973097622, -204, 0.0188679248, 0)
+Converted["_watermark"].Size = UDim2.new(0, 221, 0, 29)
+Converted["_watermark"].Name = "watermark"
+Converted["_watermark"].Parent = Converted["_gamesense.lua"]
 
-	Converted["_sense"].Font = Enum.Font.RobotoMono
-	Converted["_sense"].Text = "sense"
-	Converted["_sense"].TextColor3 = Color3.fromRGB(49.000004678964615, 255, 66.00000366568565)
-	Converted["_sense"].TextSize = 12
-	Converted["_sense"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_sense"].BackgroundTransparency = 1
-	Converted["_sense"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Converted["_sense"].BorderSizePixel = 0
-	Converted["_sense"].Position = UDim2.new(0.25, -100, 0.49000001, -13)
-	Converted["_sense"].Size = UDim2.new(0, 200, 0, 26)
-	Converted["_sense"].Name = "sense"
-	Converted["_sense"].Parent = Converted["_watermark bg"]
+Converted["_sense"].Font = Enum.Font.RobotoMono
+Converted["_sense"].Text = "sense"
+Converted["_sense"].TextColor3 = Color3.fromRGB(49.000004678964615, 255, 66.00000366568565)
+Converted["_sense"].TextSize = 12
+Converted["_sense"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
+Converted["_sense"].BackgroundTransparency = 1
+Converted["_sense"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_sense"].BorderSizePixel = 0
+Converted["_sense"].Position = UDim2.new(0.25, -100, 0.49000001, -13)
+Converted["_sense"].Size = UDim2.new(0, 200, 0, 26)
+Converted["_sense"].Name = "sense"
+Converted["_sense"].Parent = Converted["_watermark bg"]
 
-	Converted["_notifs"].AnchorPoint = Vector2.new(1, 1)
-	Converted["_notifs"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Converted["_notifs"].BackgroundTransparency = 1
-	Converted["_notifs"].BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036)
-	Converted["_notifs"].BorderSizePixel = 0
-	Converted["_notifs"].ClipsDescendants = true
-	Converted["_notifs"].Position = UDim2.new(1, -25, 1, -25)
-	Converted["_notifs"].Size = UDim2.new(0, 296, 0, 578)
-	Converted["_notifs"].ZIndex = 5
-	Converted["_notifs"].Name = "notifs"
-	Converted["_notifs"].Parent = Converted["_gamesense.lua"]
+Converted["_notifs"].AnchorPoint = Vector2.new(1, 1)
+Converted["_notifs"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_notifs"].BackgroundTransparency = 1
+Converted["_notifs"].BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036)
+Converted["_notifs"].BorderSizePixel = 0
+Converted["_notifs"].ClipsDescendants = true
+Converted["_notifs"].Position = UDim2.new(1, -25, 1, -25)
+Converted["_notifs"].Size = UDim2.new(0, 296, 0, 578)
+Converted["_notifs"].ZIndex = 5
+Converted["_notifs"].Name = "notifs"
+Converted["_notifs"].Parent = Converted["_gamesense.lua"]
 
-	Converted["_Template"].AnchorPoint = Vector2.new(0.5, 0.5)
-	Converted["_Template"].BackgroundColor3 = Color3.fromRGB(21.000000648200512, 21.000000648200512, 20.000000707805157)
-	Converted["_Template"].BorderColor3 = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
-	Converted["_Template"].BorderMode = Enum.BorderMode.Middle
-	Converted["_Template"].BorderSizePixel = 0
-	Converted["_Template"].Position = UDim2.new(0.498310804, 0, 0.912629783, 0)
-	Converted["_Template"].Size = UDim2.new(0, 295, 0, 91)
-	Converted["_Template"].Visible = false
-	Converted["_Template"].ZIndex = 100
-	Converted["_Template"].Name = "Template"
-	Converted["_Template"].Parent = Converted["_notifs"]
+Converted["_Template"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_Template"].BackgroundColor3 = Color3.fromRGB(21.000000648200512, 21.000000648200512, 20.000000707805157)
+Converted["_Template"].BorderColor3 = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
+Converted["_Template"].BorderMode = Enum.BorderMode.Middle
+Converted["_Template"].BorderSizePixel = 0
+Converted["_Template"].Position = UDim2.new(0.498310804, 0, 0.912629783, 0)
+Converted["_Template"].Size = UDim2.new(0, 295, 0, 91)
+Converted["_Template"].Visible = false
+Converted["_Template"].ZIndex = 100
+Converted["_Template"].Name = "Template"
+Converted["_Template"].Parent = Converted["_notifs"]
 
-	Converted["_game"].Font = Enum.Font.RobotoMono
-	Converted["_game"].Text = "gamesense"
-	Converted["_game"].TextColor3 = Color3.fromRGB(255, 255, 255)
-	Converted["_game"].TextSize = 18
-	Converted["_game"].TextXAlignment = Enum.TextXAlignment.Left
-	Converted["_game"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_game"].BackgroundTransparency = 1
-	Converted["_game"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Converted["_game"].BorderSizePixel = 0
-	Converted["_game"].Position = UDim2.new(0.398305088, -100, 0.225274727, -13)
-	Converted["_game"].Size = UDim2.new(0, 200, 0, 26)
-	Converted["_game"].Name = "game"
-	Converted["_game"].Parent = Converted["_Template"]
+Converted["_game"].Font = Enum.Font.RobotoMono
+Converted["_game"].Text = "gamesense"
+Converted["_game"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_game"].TextSize = 18
+Converted["_game"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_game"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
+Converted["_game"].BackgroundTransparency = 1
+Converted["_game"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_game"].BorderSizePixel = 0
+Converted["_game"].Position = UDim2.new(0.398305088, -100, 0.225274727, -13)
+Converted["_game"].Size = UDim2.new(0, 200, 0, 26)
+Converted["_game"].Name = "game"
+Converted["_game"].Parent = Converted["_Template"]
 
-	Converted["_sense1"].Font = Enum.Font.RobotoMono
-	Converted["_sense1"].Text = "sense"
-	Converted["_sense1"].TextColor3 = Color3.fromRGB(49.000004678964615, 255, 66.00000366568565)
-	Converted["_sense1"].TextSize = 18
-	Converted["_sense1"].TextXAlignment = Enum.TextXAlignment.Left
-	Converted["_sense1"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_sense1"].BackgroundTransparency = 1
-	Converted["_sense1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Converted["_sense1"].BorderSizePixel = 0
-	Converted["_sense1"].Position = UDim2.new(0.511304975, -101, 0.22626403, -13)
-	Converted["_sense1"].Size = UDim2.new(0, 171, 0, 26)
-	Converted["_sense1"].Name = "sense"
-	Converted["_sense1"].Parent = Converted["_Template"]
+Converted["_sense1"].Font = Enum.Font.RobotoMono
+Converted["_sense1"].Text = "sense"
+Converted["_sense1"].TextColor3 = Color3.fromRGB(49.000004678964615, 255, 66.00000366568565)
+Converted["_sense1"].TextSize = 18
+Converted["_sense1"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_sense1"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
+Converted["_sense1"].BackgroundTransparency = 1
+Converted["_sense1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_sense1"].BorderSizePixel = 0
+Converted["_sense1"].Position = UDim2.new(0.511304975, -101, 0.22626403, -13)
+Converted["_sense1"].Size = UDim2.new(0, 171, 0, 26)
+Converted["_sense1"].Name = "sense"
+Converted["_sense1"].Parent = Converted["_Template"]
 
-	Converted["_Description"].Font = Enum.Font.RobotoMono
-	Converted["_Description"].Text = "hey you're a bitch lol 123213123123123123"
-	Converted["_Description"].TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041)
-	Converted["_Description"].TextSize = 14
-	Converted["_Description"].TextWrapped = true
-	Converted["_Description"].TextXAlignment = Enum.TextXAlignment.Left
-	Converted["_Description"].TextYAlignment = Enum.TextYAlignment.Top
-	Converted["_Description"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_Description"].BackgroundTransparency = 1
-	Converted["_Description"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Converted["_Description"].BorderSizePixel = 0
-	Converted["_Description"].Position = UDim2.new(0.398305088, -100, 0.5, -13)
-	Converted["_Description"].Size = UDim2.new(0, 262, 0, 38)
-	Converted["_Description"].Name = "Description"
-	Converted["_Description"].Parent = Converted["_Template"]
+Converted["_Description"].Font = Enum.Font.RobotoMono
+Converted["_Description"].Text = "hey you're a bitch lol 123213123123123123"
+Converted["_Description"].TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041)
+Converted["_Description"].TextSize = 14
+Converted["_Description"].TextWrapped = true
+Converted["_Description"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_Description"].TextYAlignment = Enum.TextYAlignment.Top
+Converted["_Description"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
+Converted["_Description"].BackgroundTransparency = 1
+Converted["_Description"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Description"].BorderSizePixel = 0
+Converted["_Description"].Position = UDim2.new(0.398305088, -100, 0.5, -13)
+Converted["_Description"].Size = UDim2.new(0, 262, 0, 38)
+Converted["_Description"].Name = "Description"
+Converted["_Description"].Parent = Converted["_Template"]
 
-	Converted["_UIStroke"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	Converted["_UIStroke"].Color = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
-	Converted["_UIStroke"].LineJoinMode = Enum.LineJoinMode.Bevel
-	Converted["_UIStroke"].Parent = Converted["_Template"]
+Converted["_UIStroke"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke"].Color = Color3.fromRGB(99.00000169873238, 99.00000169873238, 99.00000169873238)
+Converted["_UIStroke"].LineJoinMode = Enum.LineJoinMode.Bevel
+Converted["_UIStroke"].Parent = Converted["_Template"]
 
-	Converted["_timestamp"].Font = Enum.Font.RobotoMono
-	Converted["_timestamp"].Text = "00:00:00"
-	Converted["_timestamp"].TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041)
-	Converted["_timestamp"].TextSize = 12
-	Converted["_timestamp"].TextWrapped = true
-	Converted["_timestamp"].TextXAlignment = Enum.TextXAlignment.Right
-	Converted["_timestamp"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-	Converted["_timestamp"].BackgroundTransparency = 1
-	Converted["_timestamp"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Converted["_timestamp"].BorderSizePixel = 0
-	Converted["_timestamp"].Position = UDim2.new(0.564406753, -100, 0.917582393, -13)
-	Converted["_timestamp"].Size = UDim2.new(0, 215, 0, 13)
-	Converted["_timestamp"].Name = "timestamp"
-	Converted["_timestamp"].Parent = Converted["_Template"]
+Converted["_timestamp"].Font = Enum.Font.RobotoMono
+Converted["_timestamp"].Text = "00:00:00"
+Converted["_timestamp"].TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041)
+Converted["_timestamp"].TextSize = 12
+Converted["_timestamp"].TextWrapped = true
+Converted["_timestamp"].TextXAlignment = Enum.TextXAlignment.Right
+Converted["_timestamp"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
+Converted["_timestamp"].BackgroundTransparency = 1
+Converted["_timestamp"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_timestamp"].BorderSizePixel = 0
+Converted["_timestamp"].Position = UDim2.new(0.564406753, -100, 0.917582393, -13)
+Converted["_timestamp"].Size = UDim2.new(0, 215, 0, 13)
+Converted["_timestamp"].Name = "timestamp"
+Converted["_timestamp"].Parent = Converted["_Template"]
 
-	Converted["_UIListLayout"].Padding = UDim.new(0, 6)
-	Converted["_UIListLayout"].HorizontalAlignment = Enum.HorizontalAlignment.Right
-	Converted["_UIListLayout"].SortOrder = Enum.SortOrder.LayoutOrder
-	Converted["_UIListLayout"].VerticalAlignment = Enum.VerticalAlignment.Bottom
-	Converted["_UIListLayout"].Parent = Converted["_notifs"]
+Converted["_UIListLayout"].Padding = UDim.new(0, 6)
+Converted["_UIListLayout"].HorizontalAlignment = Enum.HorizontalAlignment.Right
+Converted["_UIListLayout"].SortOrder = Enum.SortOrder.LayoutOrder
+Converted["_UIListLayout"].VerticalAlignment = Enum.VerticalAlignment.Bottom
+Converted["_UIListLayout"].Parent = Converted["_notifs"]
 
-	Converted["_assets"].Name = "assets"
-	Converted["_assets"].Parent = Converted["_notifs"]
+Converted["_assets"].Name = "assets"
+Converted["_assets"].Parent = Converted["_notifs"]
 
-	Converted["_notif"].RollOffMode = Enum.RollOffMode.InverseTapered
-	Converted["_notif"].SoundId = "rbxassetid://131303727931519"
-	Converted["_notif"].Name = "notif"
-	Converted["_notif"].Parent = Converted["_assets"]
+Converted["_notif"].RollOffMode = Enum.RollOffMode.InverseTapered
+Converted["_notif"].SoundId = "rbxassetid://131303727931519"
+Converted["_notif"].Name = "notif"
+Converted["_notif"].Parent = Converted["_assets"]
 
-	-- Fake Module Scripts:
+---
 
-	local fake_module_scripts = {}
+local notif_lib = {}
 
-	local notif_lib = {}
+baseNotif  = Converted["_Template"]
+notifSound = Converted["_notif"]
 
-	baseNotif  = Converted["_Template"]
-	notifSound = Converted["_notif"]
+function tween(go, t, dir)
+	dir = dir or "in"
+	local obj = go
 
-	function tween(go, t, dir)
-		dir = dir or "in"
-		local obj = go
+	local startTransparency = (dir == "in") and 1 or 0
+	local endTransparency = (dir == "in") and 0 or 1
 
-		local startTransparency = (dir == "in") and 1 or 0
-		local endTransparency = (dir == "in") and 0 or 1
+	obj.BackgroundTransparency = startTransparency
 
-		obj.BackgroundTransparency = startTransparency
+	local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quint, Enum.EasingDirection.Out, 0, false, 0)
 
-		local tweenInfo = TweenInfo.new(t, Enum.EasingStyle.Quint, Enum.EasingDirection.Out, 0, false, 0)
+	local tween = game:GetService("TweenService"):Create(obj, tweenInfo, {
+		BackgroundTransparency = endTransparency
+	})
+	tween:Play()
 
-		local tween = game:GetService("TweenService"):Create(obj, tweenInfo, {
-			BackgroundTransparency = endTransparency
-		})
-		tween:Play()
-
-		if dir == "out" then
-			for _, e in pairs(obj:GetDescendants()) do
-				if e:IsA("GuiObject") then
-					if e:IsA("TextLabel") then
-						local texttween = game:GetService("TweenService"):Create(e, tweenInfo, {
-							TextTransparency = endTransparency
-						})
-						texttween:Play()
-					elseif e:IsA("ImageLabel") or e:IsA("ImageButton") then
-						local imgt = game:GetService("TweenService"):Create(e, tweenInfo, {
-							ImageTransparency = endTransparency
-						})
-						imgt:Play()
-					elseif e:IsA("UIStroke") then
-						local st = game:GetService("TweenService"):Create(e, tweenInfo, {
-							Transparency = endTransparency
-						})
-						st:Play()
-					end
+	if dir == "out" then
+		for _, e in pairs(obj:GetDescendants()) do
+			if e:IsA("GuiObject") then
+				if e:IsA("TextLabel") then
+					local texttween = game:GetService("TweenService"):Create(e, tweenInfo, {
+						TextTransparency = endTransparency
+					})
+					texttween:Play()
+				elseif e:IsA("ImageLabel") or e:IsA("ImageButton") then
+					local imgt = game:GetService("TweenService"):Create(e, tweenInfo, {
+						ImageTransparency = endTransparency
+					})
+					imgt:Play()
+				elseif e:IsA("UIStroke") then
+					local st = game:GetService("TweenService"):Create(e, tweenInfo, {
+						Transparency = endTransparency
+					})
+					st:Play()
 				end
 			end
 		end
+	end
 end
 
-	function notif_lib:MakeNotification(notif_table: table)
-		local text = notif_table.Description or "hey nigger"
-		local dur = notif_table.Duration or 5
+function notif_lib:MakeNotification(notif_table: table)
+	local text = notif_table.Description or "This is an example notification!"
+	local dur = notif_table.Duration or 5
 
-		local newNotif = baseNotif:Clone()
-		newNotif.Parent = Converted["_notifs"]
-		newNotif.Description.Text = text
-		newNotif.timestamp.Text = _internal_gettime()
-		newNotif.Visible = true
-		newNotif.Name = "gamesense.lua - ".._internal_randomstr(8)
+	local newNotif = baseNotif:Clone()
+	newNotif.Parent = Converted["_notifs"]
+	newNotif.Description.Text = text
+	newNotif.timestamp.Text = _internal_gettime()
+	newNotif.Visible = true
+	newNotif.Name = "gamesense.lua - ".._internal_randomstr(8)
 
-		local holder = Converted["_notifs"]
-		local notifications = holder:GetChildren()
-		local numNotifications = #notifications
+	local holder = Converted["_notifs"]
+	local notifications = holder:GetChildren()
+	local numNotifications = #notifications
 
-		local layout = holder.UIListLayout
-		local layoutOrder = layout.Padding.Offset
+	local layout = holder.UIListLayout
+	local layoutOrder = layout.Padding.Offset
 
-		for i, notification in ipairs(notifications) do
-			if notification ~= baseNotif and
-				notification ~= newNotif and
-				notification ~= layout and
-				notification:IsA("Frame")
-			then
-				if numNotifications == 1 then
-					layoutOrder = layoutOrder - 1
-				else
-					layoutOrder = notification.LayoutOrder + 1
-				end
-				tween(notification, 0.25)
+	for i, notification in ipairs(notifications) do
+		if notification ~= baseNotif and
+			notification ~= newNotif and
+			notification ~= layout and
+			notification:IsA("Frame")
+		then
+			if numNotifications == 1 then
+				layoutOrder = layoutOrder - 1
+			else
+				layoutOrder = notification.LayoutOrder + 1
 			end
+			tween(notification, 0.25)
 		end
-
-		newNotif.LayoutOrder = layoutOrder
-
-		notifSound:Play()
-		tween(newNotif, 0.5, "in")
-
-		spawn(function()
-			wait(dur)
-			tween(newNotif, 0.5, "out")
-			wait(0.5)
-			newNotif:Destroy()
-		end)
 	end
 
-	-- Fake Local Scripts:
+	newNotif.LayoutOrder = layoutOrder
 
-	local function DWNDR_fake_script() -- Fake Script: StarterGui.idk.gamesense.lua.tick
-		local script = Instance.new("LocalScript")
-		script.Name = "tick"
-		script.Parent = Converted["_gamesense.lua"]
-		local req = require
-		local require = function(obj)
-			local fake = fake_module_scripts[obj]
-			if fake then
-				return fake()
-			end
-			return req(obj)
-		end
+	notifSound:Play()
+	tween(newNotif, 0.5, "in")
 
-		--// gamesense.lua
-		--// tick - manage tick / sec
-		--// author: @focat
+	spawn(function()
+		wait(dur)
+		tween(newNotif, 0.5, "out")
+		wait(0.5)
+		newNotif:Destroy()
+	end)
+end
 
-		---
+local function _watermark_tick()
+	--// gamesense.lua
+	--// tick - manage tick / sec
+	--// author: @focat
 
-		local env = {}
-		env["_internal"] = {} -- initalization
+	---
 
-		-- gamesense->watermark
+	local env = {}
+	env["_internal"] = {} -- initalization
 
-		local watermark_gui  = script.Parent
-		local watermark_text = watermark_gui["watermark"]
-		local heartbeat      = s_runservice.Heartbeat
+	-- gamesense->watermark
 
-		---
+	local watermark_gui  = script.Parent
+	local watermark_text = watermark_gui["watermark"]
+	local s_players      = game:GetService("Players")
+	local s_runservice   = game:GetService("RunService")
+	local heartbeat      = s_runservice.Heartbeat
+	local localplayer    = s_players.LocalPlayer
+	local displayname    = localplayer.DisplayName
 
-		--// self explanitory
-		env["_internal"]["get_time"] = function()
-			local time = os.date("%H:%M:%S", os.time())
-			return time
-		end
-		env["_internal"]["update_watermark"] = function()
-			local time = env["_internal"]["get_time"]()
-			local ping = math.floor(s_stats.PerformanceStats.Ping:GetValue())
-			watermark_text.Text = string.format("<font color=\"#31ff42\">gamesense</font> | %s ms| %s", ping, time)
-		end
+	---
 
-		---
-
-		--// heartbeat loop
-		heartbeat:Connect(function()
-			-- watermark
-			env["_internal"]["update_watermark"]()
-
-			---
-
-			-- soon:tm:
-			-- memory
-			-- ping
-			-- fps
-		end)
-
-		print(string.format("[ gamesense.lua ] [ %s ] tick service connected", env["_internal"]["get_time"]()))
+	--// self explanitory
+	env["_internal"]["get_time"] = function()
+		local time = os.date("%H:%M:%S", os.time())
+		return time
+	end
+	env["_internal"]["update_watermark"] = function()
+		local time = env["_internal"]["get_time"]()
+		watermark_text.Text = string.format("<font color=\"#31ff42\">gamesense</font> | %s | %s", displayname, time)
 	end
 
-	coroutine.wrap(DWNDR_fake_script)()
+	---
+
+	--// heartbeat loop
+	heartbeat:Connect(function()
+		-- watermark
+		env["_internal"]["update_watermark"]()
+
+		---
+
+		-- soon:tm:
+		-- memory
+		-- ping
+		-- fps
+	end)
+
+	print(string.format("[ gamesense.lua ] [ %s ] tick service connected", env["_internal"]["get_time"]()))
+end
+coroutine.wrap(_watermark_tick)()
 --end
 
 local Library = {}
@@ -365,7 +347,7 @@ function Library:_validate(defaults: table, options: table)
 	return options
 end
 function Library:_tween(object, goal, callback)
-	local tween = s_tweenservice:Create(object, tweeninfo, goal)
+	local tween = s_tweenservice:Create(object, TWEENINFO, goal)
 	tween.Completed:Connect(callback or function() end)
 	tween:Play()
 end
@@ -392,7 +374,7 @@ function Library:New(options: table)
 	--// Initalization
 	do
 		-- StarterGui.ui lib
-		GUI["1"] = Instance.new("ScreenGui", s_runservice:IsStudio() and localplayer:WaitForChild("PlayerGui") or gethui() or s_coregui)
+		GUI["1"] = Instance.new("ScreenGui", s_runservice:IsStudio() and s_players.LocalPlayer:WaitForChild("PlayerGui") or gethui() or s_coregui)
 		GUI["1"]["IgnoreGuiInset"] = true;
 		GUI["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 		GUI["1"]["Name"] = [[gamesense.lua]];
@@ -405,8 +387,8 @@ function Library:New(options: table)
 		GUI["2"]["BackgroundColor3"] = Color3.fromRGB(22, 22, 21);
 		GUI["2"]["Size"] = UDim2.new(0, 380, 0, 436);
 		GUI["2"]["Position"] = UDim2.fromOffset(
-			(viewportsize.X / 2) - GUI["2"].Size.X.Offset / 2, 
-			(viewportsize.Y / 2) - GUI["2"].Size.Y.Offset / 2
+			(VIEWPORT.X / 2) - GUI["2"].Size.X.Offset / 2, 
+			(VIEWPORT.Y / 2) - GUI["2"].Size.Y.Offset / 2
 		)
 		GUI["2"]["BorderColor3"] = Color3.fromRGB(100, 100, 100);
 		GUI["2"]["Name"] = [[gamesense window]];
@@ -436,20 +418,22 @@ function Library:New(options: table)
 		--// starts with "gamesense"?
 		if string.sub(options["Name"], 1, 9) == "gamesense" then
 			--// Green "sense" in "gamesense.lua"
-			GUI["3b"] = Instance.new("TextLabel", GUI["3a"]);
-			GUI["3b"]["ZIndex"] = 2;
-			GUI["3b"]["BorderSizePixel"] = 0;
-			GUI["3b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-			GUI["3b"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
-			GUI["3b"]["TextSize"] = 18;
-			GUI["3b"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-			GUI["3b"]["TextColor3"] = Color3.fromRGB(50, 255, 67);
-			GUI["3b"]["BackgroundTransparency"] = 1;
-			GUI["3b"]["Size"] = UDim2.new(0, 200, 0, 25);
-			GUI["3b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-			GUI["3b"]["Text"] = [[sense]];
-			GUI["3b"]["Name"] = [[sense]];
-			GUI["3b"]["Position"] = UDim2.new(0.12368, 0, 0.22727, 0);
+			--GUI["3b"] = Instance.new("TextLabel", GUI["3a"]);
+			--GUI["3b"]["ZIndex"] = 2;
+			--GUI["3b"]["BorderSizePixel"] = 0;
+			--GUI["3b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+			--GUI["3b"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+			--GUI["3b"]["TextSize"] = 18;
+			--GUI["3b"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			--GUI["3b"]["TextColor3"] = Color3.fromRGB(50, 255, 67);
+			--GUI["3b"]["BackgroundTransparency"] = 1;
+			--GUI["3b"]["Size"] = UDim2.new(0, 200, 0, 25);
+			--GUI["3b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+			--GUI["3b"]["Text"] = [[sense]];
+			--GUI["3b"]["Name"] = [[sense]];
+			--GUI["3b"]["Position"] = UDim2.new(0.12368, 0, 0.22727, 0);
+			--// replace "gamesense" with "game<font color=\"#31ff42\">sense</font>"
+			options["Name"] = string.gsub(options["Name"], "gamesense", "game<font color=\"#31ff42\">sense</font>");
 		end
 		
 		-- StarterGui.ui lib.gamesense window.titlebar.gamesense.lua
@@ -463,9 +447,10 @@ function Library:New(options: table)
 		GUI["3c"]["BackgroundTransparency"] = 1;
 		GUI["3c"]["Size"] = UDim2.new(0, 200, 0, 26);
 		GUI["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		GUI["3c"]["Text"] = typeof(options["Name"] == "string") and options["Name"] or "gamesense.lua";
+		GUI["3c"]["Text"] = typeof(options["Name"] == "string") and options["Name"] or "game<font color=\"#31ff42\">sense</font>.lua";
 		GUI["3c"]["Name"] = "gamesense_".._internal_randomstr(32)
 		GUI["3c"]["Position"] = UDim2.new(0.03947, 0, 0.20455, 0);
+		GUI["3c"]["RichText"] = true
 
 
 		-- StarterGui.ui lib.gamesense window.titlebar.ImageLabel (Close button)
@@ -1017,7 +1002,6 @@ function Library:New(options: table)
 				--	Label["7"].TextBounds.Y
 				--)
 			end
-			return Label
 		end
 		
 		function Tab:Slider(options: table)
@@ -1136,7 +1120,7 @@ function Library:New(options: table)
 					
 					----// 2c == bar inside, so we use 2a to reference the whole bar
 					local percentage = math.clamp(
-						(playermouse.X - Slider["2a"].AbsolutePosition.X) / Slider["2a"].AbsoluteSize.X, 0, 1
+						(MOUSE.X - Slider["2a"].AbsolutePosition.X) / Slider["2a"].AbsoluteSize.X, 0, 1
 					)
 					local rawValue = ((options.Max - options.Min) * percentage) + options.Min
 					local steppedValue = math.floor((rawValue / step) + 0.5) * step --// round to nearest step
@@ -1209,7 +1193,6 @@ function Library:New(options: table)
 			do
 				Slider:SetValue(options["Default"]) --// will position slider @ default area and not hard coded position
 			end
-            return Slider
 		end
 		
 		function Tab:Toggle(options: table)
@@ -1317,12 +1300,11 @@ function Library:New(options: table)
 					options["Callback"](Toggle:GetValue())
 				end)
 			end
-            return Toggle
 		end
 		
 		function Tab:Textbox(options: table)
 			options = Library:_validate({
-				Placeholder = "Text Placeholder",
+				Placeholder = "Enter your username...",
 				Callback = function(v) print(v) end
 			}, options or {})
 
@@ -1401,7 +1383,6 @@ function Library:New(options: table)
 					options["Callback"](Textbox:GetValue())
 				end)
 			end
-            return Textbox
 		end
 		
 		return Tab
@@ -1414,4 +1395,176 @@ function Library:New(options: table)
 	return GUI
 end
 
-return Library
+--return Library -- for publishing else remove
+
+--------------------------------------------------
+
+--local Window = Library:New {
+--	Name = "gamesense | universal",
+--	Padding = 8
+--}
+--local fishingTab = Window:CreateTab({ Name = "Fishing" })
+--local webhookTab = Window:CreateTab({ Name = "Webhook" })
+--local _ = Window:CreateTab()
+--local btn = fishingTab:Button({
+--	Name = "click me!",
+--	Callback = function()
+--		print("clicked")
+--	end,
+--})
+--local i = 0
+--btn:SetCallback(function()
+--	i += 1
+--	btn:SetText("clicked "..tostring(i).." times")
+--end)
+--local label = fishingTab:Label({
+--	Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+--})
+--local label = fishingTab:Label({
+--	Message = "Yeah, you can have REALLY big text and have it autoscale tehe"
+--})
+--local slider = fishingTab:Slider({
+--	Name = "Walkspeed",
+--	Min = 0,
+--	Max = 100,
+--	Default = 10,
+--	Callback = function(v) LOCALPLAYER.Character.Humanoid.WalkSpeed = v end
+--})
+--local toggle3dRendering = fishingTab:Toggle({
+--	Name = "3D Rendering",
+--	State = true,
+--	Callback = function(value)
+--		print(value)
+--	end,
+--})
+--local webhookurlTextbox = webhookTab:Textbox({
+--	Placeholder = "Enter webhook url...",
+--	Callback = function(text)
+--		print("Input entered: "..text)
+--	end,	
+--})
+--local btn = webhookTab:Button({
+--	Name = "click 4 error hahaha",
+--	Callback = function()
+--		g = nil * 12
+--	end,
+--})
+
+--local Library = loadstring(game:HttpGet("https://example.com/gamesense.lua"))() -- pretend this is here troll
+local Window = Library:New({
+	Name = "gamesense | universal",
+	Padding = 8
+})
+
+--// Aimbot Tab
+local aimbotTab = Window:CreateTab({ Name = "Aimbot" })
+aimbotTab:Label({ Message = "Aimbot Settings" })
+
+--// Aimbot Toggles
+local aimbotEnabled = aimbotTab:Toggle({
+	Name = "Enable Aimbot",
+	State = false,
+	Callback = function(state)
+		print("Aimbot Enabled: ", state)
+	end
+})
+local silentAim = aimbotTab:Toggle({
+	Name = "Silent Aim",
+	State = false,
+	Callback = function(state)
+		print("Silent Aim: ", state)
+	end
+})
+
+--// Aimbot Sliders
+local fovSlider = aimbotTab:Slider({
+	Name = "Aimbot FOV",
+	Min = 0,
+	Max = 360,
+	Default = 90,
+	Callback = function(value)
+		print("Aimbot FOV set to: ", value)
+	end
+})
+
+local smoothnessSlider = aimbotTab:Slider({
+	Name = "Smoothness",
+	Min = 1,
+	Max = 10,
+	Default = 5,
+	Callback = function(value)
+		print("Smoothness set to: ", value)
+	end
+})
+
+local predictionSlider = aimbotTab:Slider({
+	Name = "Prediction",
+	Min = 0,
+	Max = 1,
+	Default = 0.165,
+	Step = 0.001,
+	Callback = function(value)
+		print("Prediction set to: ", value)
+	end
+})
+
+--// Visuals Tab
+local visualsTab = Window:CreateTab({ Name = "Visuals" })
+visualsTab:Label({ Message = "ESP & Visual Settings" })
+
+--// Visual Toggles
+local boxEsp = visualsTab:Toggle({
+	Name = "Enable Box ESP",
+	State = false,
+	Callback = function(state)
+		print("Box ESP: ", state)
+	end
+})
+local healthBar = visualsTab:Toggle({
+	Name = "Show Health Bar",
+	State = true,
+	Callback = function(state)
+		print("Health Bar: ", state)
+	end
+})
+local nameTags = visualsTab:Toggle({
+	Name = "Show Name Tags",
+	State = true,
+	Callback = function(state)
+		print("Name Tags: ", state)
+	end
+})
+
+--// Misc Tab
+local miscTab = Window:CreateTab({ Name = "Misc" })
+miscTab:Label({ Message = "Config Settings" })
+
+local configName = ""
+local configInput = miscTab:Textbox({
+	Placeholder = "Enter config name...",
+	Callback = function(input)
+		configName = input
+		print("Config Name: ", input)
+	end
+})
+
+miscTab:Button({
+	Name = "Save Config",
+	Callback = function()
+		Library:Notify({
+			Description = "Config '" .. (configName ~= "" and configName or "default") .. "' saved!",
+			Duration = 3
+		})
+		print("Config saved:", configName)
+	end
+})
+miscTab:Button({
+	Name = "Load Config",
+	Callback = function()
+		Library:Notify({
+			Description = "Config '" .. (configName ~= "" and configName or "default") .. "' loaded!",
+			Duration = 3
+		})
+		print("Config loaded:", configName)
+	end
+})
