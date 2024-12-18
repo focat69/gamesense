@@ -31,7 +31,7 @@ Example:
 
 ```lua
 local Window = Library:New({
-    Name = "gamesense | Rivals Premium",
+    Name = "gamesense | Rivals Premium", -- Supports Rich Text!
     Padding = 8
 })
 Window:Destroy() -- destroys window (wow)
