@@ -3,7 +3,7 @@
 
 # UI Demo
 ```lua
-local Library = loadstring(
+loadstring(
     game:HttpGetAsync("https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/example.luau")
 )()
 ```
