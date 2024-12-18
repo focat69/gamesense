@@ -113,7 +113,7 @@ Converted["_Template"].Name = "Template"
 Converted["_Template"].Parent = Converted["_notifs"]
 
 Converted["_game"].Font = Enum.Font.RobotoMono
-Converted["_game"].Text = "gamesense"
+Converted["_game"].Text = "game<font color=\"#31ff42\">sense</font>"
 Converted["_game"].TextColor3 = Color3.fromRGB(255, 255, 255)
 Converted["_game"].TextSize = 18
 Converted["_game"].TextXAlignment = Enum.TextXAlignment.Left
@@ -125,20 +125,7 @@ Converted["_game"].Position = UDim2.new(0.398305088, -100, 0.225274727, -13)
 Converted["_game"].Size = UDim2.new(0, 200, 0, 26)
 Converted["_game"].Name = "game"
 Converted["_game"].Parent = Converted["_Template"]
-
-Converted["_sense1"].Font = Enum.Font.RobotoMono
-Converted["_sense1"].Text = "sense"
-Converted["_sense1"].TextColor3 = Color3.fromRGB(49.000004678964615, 255, 66.00000366568565)
-Converted["_sense1"].TextSize = 18
-Converted["_sense1"].TextXAlignment = Enum.TextXAlignment.Left
-Converted["_sense1"].BackgroundColor3 = Color3.fromRGB(26.000000350177288, 26.000000350177288, 26.000000350177288)
-Converted["_sense1"].BackgroundTransparency = 1
-Converted["_sense1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_sense1"].BorderSizePixel = 0
-Converted["_sense1"].Position = UDim2.new(0.511304975, -101, 0.22626403, -13)
-Converted["_sense1"].Size = UDim2.new(0, 171, 0, 26)
-Converted["_sense1"].Name = "sense"
-Converted["_sense1"].Parent = Converted["_Template"]
+Converted["_game"].RichText = true
 
 Converted["_Description"].Font = Enum.Font.RobotoMono
 Converted["_Description"].Text = "hey you're a bitch lol 123213123123123123"
@@ -1394,176 +1381,4 @@ function Library:New(options: table)
 	return GUI
 end
 
---return Library -- for publishing else remove
-
---------------------------------------------------
-
---local Window = Library:New {
---	Name = "gamesense | universal",
---	Padding = 8
---}
---local fishingTab = Window:CreateTab({ Name = "Fishing" })
---local webhookTab = Window:CreateTab({ Name = "Webhook" })
---local _ = Window:CreateTab()
---local btn = fishingTab:Button({
---	Name = "click me!",
---	Callback = function()
---		print("clicked")
---	end,
---})
---local i = 0
---btn:SetCallback(function()
---	i += 1
---	btn:SetText("clicked "..tostring(i).." times")
---end)
---local label = fishingTab:Label({
---	Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
---})
---local label = fishingTab:Label({
---	Message = "Yeah, you can have REALLY big text and have it autoscale tehe"
---})
---local slider = fishingTab:Slider({
---	Name = "Walkspeed",
---	Min = 0,
---	Max = 100,
---	Default = 10,
---	Callback = function(v) LOCALPLAYER.Character.Humanoid.WalkSpeed = v end
---})
---local toggle3dRendering = fishingTab:Toggle({
---	Name = "3D Rendering",
---	State = true,
---	Callback = function(value)
---		print(value)
---	end,
---})
---local webhookurlTextbox = webhookTab:Textbox({
---	Placeholder = "Enter webhook url...",
---	Callback = function(text)
---		print("Input entered: "..text)
---	end,	
---})
---local btn = webhookTab:Button({
---	Name = "click 4 error hahaha",
---	Callback = function()
---		g = nil * 12
---	end,
---})
-
---local Library = loadstring(game:HttpGet("https://example.com/gamesense.lua"))() -- pretend this is here troll
-local Window = Library:New({
-	Name = "gamesense | universal",
-	Padding = 8
-})
-
---// Aimbot Tab
-local aimbotTab = Window:CreateTab({ Name = "Aimbot" })
-aimbotTab:Label({ Message = "Aimbot Settings" })
-
---// Aimbot Toggles
-local aimbotEnabled = aimbotTab:Toggle({
-	Name = "Enable Aimbot",
-	State = false,
-	Callback = function(state)
-		print("Aimbot Enabled: ", state)
-	end
-})
-local silentAim = aimbotTab:Toggle({
-	Name = "Silent Aim",
-	State = false,
-	Callback = function(state)
-		print("Silent Aim: ", state)
-	end
-})
-
---// Aimbot Sliders
-local fovSlider = aimbotTab:Slider({
-	Name = "Aimbot FOV",
-	Min = 0,
-	Max = 360,
-	Default = 90,
-	Callback = function(value)
-		print("Aimbot FOV set to: ", value)
-	end
-})
-
-local smoothnessSlider = aimbotTab:Slider({
-	Name = "Smoothness",
-	Min = 1,
-	Max = 10,
-	Default = 5,
-	Callback = function(value)
-		print("Smoothness set to: ", value)
-	end
-})
-
-local predictionSlider = aimbotTab:Slider({
-	Name = "Prediction",
-	Min = 0,
-	Max = 1,
-	Default = 0.165,
-	Step = 0.001,
-	Callback = function(value)
-		print("Prediction set to: ", value)
-	end
-})
-
---// Visuals Tab
-local visualsTab = Window:CreateTab({ Name = "Visuals" })
-visualsTab:Label({ Message = "ESP & Visual Settings" })
-
---// Visual Toggles
-local boxEsp = visualsTab:Toggle({
-	Name = "Enable Box ESP",
-	State = false,
-	Callback = function(state)
-		print("Box ESP: ", state)
-	end
-})
-local healthBar = visualsTab:Toggle({
-	Name = "Show Health Bar",
-	State = true,
-	Callback = function(state)
-		print("Health Bar: ", state)
-	end
-})
-local nameTags = visualsTab:Toggle({
-	Name = "Show Name Tags",
-	State = true,
-	Callback = function(state)
-		print("Name Tags: ", state)
-	end
-})
-
---// Misc Tab
-local miscTab = Window:CreateTab({ Name = "Misc" })
-miscTab:Label({ Message = "Config Settings" })
-
-local configName = ""
-local configInput = miscTab:Textbox({
-	Placeholder = "Enter config name...",
-	Callback = function(input)
-		configName = input
-		print("Config Name: ", input)
-	end
-})
-
-miscTab:Button({
-	Name = "Save Config",
-	Callback = function()
-		Library:Notify({
-			Description = "Config '" .. (configName ~= "" and configName or "default") .. "' saved!",
-			Duration = 3
-		})
-		print("Config saved:", configName)
-	end
-})
-miscTab:Button({
-	Name = "Load Config",
-	Callback = function()
-		Library:Notify({
-			Description = "Config '" .. (configName ~= "" and configName or "default") .. "' loaded!",
-			Duration = 3
-		})
-		print("Config loaded:", configName)
-	end
-})
+return Library -- for publishing else remove
