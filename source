@@ -40,7 +40,6 @@ end
 local Converted = {
 	["_gamesense.lua"] = Instance.new("ScreenGui");
 	["_tick"] = Instance.new("LocalScript");
-	["_watermark bg"] = Instance.new("Frame");
 	["_watermark"] = Instance.new("TextLabel");
 	["_sense"] = Instance.new("TextLabel");
 	["_notifs"] = Instance.new("Frame");
@@ -297,7 +296,7 @@ local function _watermark_tick()
 	-- gamesense->watermark
 
 	local watermark_gui  = script.Parent
-	local watermark_text = watermark_gui["watermark"]
+	local watermark_text = Converted["_watermark"]
 	local s_players      = game:GetService("Players")
 	local s_runservice   = game:GetService("RunService")
 	local heartbeat      = s_runservice.Heartbeat
