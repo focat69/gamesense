@@ -1,7 +1,7 @@
 # Gamesense.lua
 - UI Library made for Roblox, inspired by the Counter-Strike cheat "Gamesense" aka "Skeet.cc"
 
-# UI Demo
+# UI Demo (not the library module!)
 ```lua
 loadstring(
     game:HttpGetAsync("https://raw.githubusercontent.com/focat69/gamesense/refs/heads/main/example.luau")
@@ -268,5 +268,5 @@ Library:Notify({
 This is my first ever proper UI library, so any feedback is appreciated. I hope you find this useful! `:)`
 
 Made with 💕 by [@focat69](https://github.com/@focat69)  
-Check out https://weao.xyz & https://shotta.city whilst you're at it.  
+Check out https://weao.xyz & https://juggi.ng whilst you're at it.  
 Thank you to all contributors for adding little fixes!
